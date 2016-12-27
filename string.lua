@@ -10,19 +10,19 @@ function M.urlencode(str)
   return str
 end
 
-function M.string_split(str, separator)
+function M.split(str, separator)
   local t, ll
   t = {}
   ll = 0
   if #str == 1 then return {str} end
   while true do
-    local l = string.find(str, separator, ll, true) -- find the next d in the string
-    if l ~= nil then -- if "not not" found then..
-    table.insert(t, string.sub(str, ll, l - 1)) -- Save it in our array.
-    ll = l+1 -- save just after where we found it for searching next time.
+    local l = string.find(str, separator, ll, true) -- find the next separator in the string
+    if l ~= nil then -- if found then..
+      table.insert(t, string.sub(str, ll, l - 1))
+      ll = l + #separator
     else
       table.insert(t, string.sub(str, ll)) -- Save what's left in our array.
-      break -- Break at end, as it should be, according to the lua manual.
+      break
     end
   end
   return t
